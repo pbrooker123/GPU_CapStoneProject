@@ -1,32 +1,40 @@
-# CUDAatScaleForTheEnterpriseCourseProjectTemplate
-This is a template for the course project for the CUDA at Scale for the Enterprise
+# 1D FFT exporations with cuFFT
+Please read the ppt first to understand the project
+Project starting point was the NPP Box Filter Lab located in week5 of the Cuda at Scale course
 
 ## Project Description
+Please read the ppt first to understand the project background.
 
-Beyond just being a template for course members, this project can be used by non-course members as the general structure for CUDA projects.
+In this project, I probe the fft frequency spectrum output with various 1D arry test cases. In particular, I define input signals of fixed frequencies. In the ppt, I outline what expected solution is for a fixed frequency signal.
+
+Also, I invesigate the spectrum obtained from a tophat signal as input.
+
+Next, I figure out how to block all but the lowest 5 (out of 20)  frequencies and show that the tophat turns into the ringing tophat as expected from the invFFT of the filtered frequency spectrum.
+
+Finally, I show how to use the cufftPlanMany option where more that 1 signals can be loaded into one array, and the FFTs be done at once in batch. THis shows the methodology of creating a 1D array of say >10,000 signals and sending them all at once for FFT processing.
 
 ## Code Organization
 
 ```bin/```
-This folder should hold all binary/executable code that is built automatically or manually. Executable code should have use the .exe extension or programming language-specific extension.
+Empty. Main level has *.cu & *.cpp
 
 ```data/```
-This folder should hold all example data in any format. If the original data is rather large or can be brought in via scripts, this can be left blank in the respository, so that it doesn't require major downloads when all that is desired is the code/structure.
+*.png files produced by the program are stored here
 
 ```lib/```
-Any libraries that are not installed via the Operating System-specific package manager should be placed here, so that it is easier for inclusion/linking.
+The program runs in the coursera environment for NPP Box Filter Lab located in week5 of the Cuda at Scale course. The Makefile contains a number of modifications to allow the program to run.
 
 ```src/```
-The source code should be placed here in a hierarchical fashion, as appropriate.
+Empty
 
 ```README.md```
 This file should hold the description of the project so that anyone cloning or deciding if they want to clone this repository can understand its purpose to help with their decision.
 
 ```INSTALL```
-This file should hold the human-readable set of instructions for installing the code so that it can be executed. If possible it should be organized around different operating systems, so that it can be done by as many people as possible with different constraints.
+Just need to  make sure all libraries referenced in the makefile are available.
 
 ```Makefile or CMAkeLists.txt or build.sh```
 There should be some rudimentary scripts for building your project's code in an automatic fashion.
 
 ```run.sh```
-An optional script used to run your executable code, either with or without command-line arguments.
+No run.sh. Code has no inputs. Just run with ./FFT1D_GPU
